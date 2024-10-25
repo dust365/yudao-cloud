@@ -14,8 +14,8 @@ services:
         restart: unless-stopped
         environment:
             TZ: Asia/Shanghai
-            MYSQL_ROOT_PASSWORD: 123456
-            MYSQL_DATABASE: ruoyi-vue-pro
+            MYSQL_ROOT_PASSWORD: admin123
+            MYSQL_DATABASE: ruoyi_vue_pro
         ports:
             - "3306:3306"
         volumes:

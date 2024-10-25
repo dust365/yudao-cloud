@@ -21,6 +21,7 @@ public class BpmServerApplication {
         // 如果你碰到启动的问题，请认真阅读 https://cloud.iocoder.cn/quick-start/ 文章
 
         SpringApplication.run(BpmServerApplication.class, args);
+        System.out.println("Yudao BPM Server 启动成功 http://127.0.0.1:48083/");
 
         // 如果你碰到启动的问题，请认真阅读 https://cloud.iocoder.cn/quick-start/ 文章
         // 如果你碰到启动的问题，请认真阅读 https://cloud.iocoder.cn/quick-start/ 文章

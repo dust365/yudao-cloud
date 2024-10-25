@@ -2,8 +2,11 @@ package cn.iocoder.yudao.framework.banner.core;
 
 import cn.hutool.core.thread.ThreadUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.env.Environment;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.boot.autoconfigure.web.ServerProperties;
 
 import java.util.concurrent.TimeUnit;
 
@@ -15,12 +18,26 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 public class BannerApplicationRunner implements ApplicationRunner {
 
+    @Autowired
+    private ServerProperties serverProperties;
+
+    @Autowired
+    private Environment env;
+
+
     @Override
     public void run(ApplicationArguments args) {
         ThreadUtil.execute(() -> {
             ThreadUtil.sleep(1, TimeUnit.SECONDS); // 延迟 1 秒，保证输出到结尾
+
+            String serverPort = serverProperties.getPort().toString();
+            String serverAddress = env.getProperty("server.address", "localhost");
+            String adress="http://"+serverAddress+":"+serverPort;
+
+            System.out.println("Application is running on: http://" + serverAddress + ":" + serverPort);
+
             log.info("\n----------------------------------------------------------\n\t" +
-                            "项目启动成功！\n\t" +
+                            "项目启动成功！地址:" +adress+"\n\t"+
                             "接口文档: \t{} \n\t" +
                             "开发文档: \t{} \n\t" +
                             "视频教程: \t{} \n" +
