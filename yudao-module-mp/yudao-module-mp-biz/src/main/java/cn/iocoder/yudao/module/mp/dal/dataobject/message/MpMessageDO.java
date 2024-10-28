@@ -240,3 +240,6 @@ public class MpMessageDO extends BaseDO {
     }
 
 }
+
+
+
