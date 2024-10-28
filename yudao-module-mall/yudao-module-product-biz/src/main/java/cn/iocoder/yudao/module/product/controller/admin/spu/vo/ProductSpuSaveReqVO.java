@@ -19,6 +19,12 @@ public class ProductSpuSaveReqVO {
     @NotEmpty(message = "商品名称不能为空")
     private String name;
 
+    @Schema(description = "商品条码", requiredMode = Schema.RequiredMode.REQUIRED, example = "123456",defaultValue = "123456")
+    private String bar_code;
+
+    @Schema(description = "单位", requiredMode = Schema.RequiredMode.REQUIRED, example = "1" )
+    private String unit;
+
     @Schema(description = "关键字", requiredMode = Schema.RequiredMode.REQUIRED, example = "清凉丝滑不出汗")
     @NotEmpty(message = "商品关键字不能为空")
     private String keyword;

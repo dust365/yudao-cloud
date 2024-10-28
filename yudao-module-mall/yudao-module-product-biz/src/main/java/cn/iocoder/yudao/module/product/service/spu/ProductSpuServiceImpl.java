@@ -64,6 +64,20 @@ public class ProductSpuServiceImpl implements ProductSpuService {
         productSkuService.validateSkuList(skuSaveReqList, createReqVO.getSpecType());
 
         ProductSpuDO spu = BeanUtils.toBean(createReqVO, ProductSpuDO.class);
+
+        //-------补充字段-- start---------
+        if(spu.getBar_code()==null){
+            spu.setBar_code("123456");
+        }
+        spu.setUnit(0);
+        spu.setDeliveryTemplateId(99l);
+        spu.setRecommend_hot(true);
+        spu.setRecommend_best(true);
+        spu.setRecommend_benefit(true);
+        spu.setRecommend_good(true);
+        spu.setRecommend_new(true);
+        //-------补充字段-- end---------
+
         // 初始化 SPU 中 SKU 相关属性
         initSpuFromSkus(spu, skuSaveReqList);
         // 插入 SPU

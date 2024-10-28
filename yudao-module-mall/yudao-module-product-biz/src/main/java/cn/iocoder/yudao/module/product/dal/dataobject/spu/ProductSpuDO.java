@@ -46,6 +46,16 @@ public class ProductSpuDO extends BaseDO {
      * 关键字
      */
     private String keyword;
+
+
+    private String bar_code;
+    private int unit;
+    private boolean recommend_hot;
+    private boolean recommend_benefit;
+    private boolean recommend_best;
+    private boolean recommend_new;
+    private boolean recommend_good;
+
     /**
      * 商品简介
      */
