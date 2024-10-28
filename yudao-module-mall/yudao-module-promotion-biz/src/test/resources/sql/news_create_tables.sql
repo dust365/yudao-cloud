@@ -1,0 +1,246 @@
+
+
+CREATE TABLE IF NOT EXISTS `market_activity` (
+                                                 `id`                    BIGINT NOT NULL AUTO_INCREMENT,
+                                                 `title`                 VARCHAR(50) NOT NULL,
+                                                 `activity_type`         TINYINT NOT NULL,
+                                                 `status`                TINYINT NOT NULL,
+                                                 `start_time`            DATETIME NOT NULL,
+                                                 `end_time`              DATETIME NOT NULL,
+                                                 `invalid_time`          DATETIME,
+                                                 `delete_time`           DATETIME,
+                                                 `time_limited_discount` VARCHAR(2000),
+                                                 `full_privilege`        VARCHAR(2000),
+                                                 `creator`               VARCHAR(64) DEFAULT '',
+                                                 `create_time`           DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                                                 `updater`               VARCHAR(64) DEFAULT '',
+                                                 `update_time`           DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+                                                 `deleted`               BIT(1) NOT NULL DEFAULT b'0',
+                                                 `tenant_id`             BIGINT NOT NULL,
+                                                 PRIMARY KEY (`id`)
+) COMMENT='促销活动';
+
+CREATE TABLE IF NOT EXISTS `promotion_coupon_template` (
+                                                           `id`                   BIGINT NOT NULL AUTO_INCREMENT,
+                                                           `name`                 VARCHAR(255) NOT NULL,
+                                                           `status`               INT NOT NULL,
+                                                           `total_count`          INT NOT NULL,
+                                                           `take_limit_count`     INT NOT NULL,
+                                                           `take_type`            INT NOT NULL,
+                                                           `use_price`            INT NOT NULL,
+                                                           `product_scope`        INT NOT NULL,
+                                                           `product_spu_ids`      VARCHAR(2000),
+                                                           `validity_type`        INT NOT NULL,
+                                                           `valid_start_time`     DATETIME,
+                                                           `valid_end_time`       DATETIME,
+                                                           `fixed_start_term`     INT,
+                                                           `fixed_end_term`       INT,
+                                                           `discount_type`        INT NOT NULL,
+                                                           `discount_percent`     INT,
+                                                           `discount_price`       INT,
+                                                           `discount_limit_price` INT,
+                                                           `take_count`           INT NOT NULL DEFAULT 0,
+                                                           `use_count`            INT NOT NULL DEFAULT 0,
+                                                           `creator`              VARCHAR(64) DEFAULT '',
+                                                           `create_time`          DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                                                           `updater`              VARCHAR(64) DEFAULT '',
+                                                           `update_time`          DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+                                                           `deleted`              BIT(1) NOT NULL DEFAULT b'0',
+                                                           PRIMARY KEY (`id`)
+) COMMENT='优惠劵模板';
+
+CREATE TABLE IF NOT EXISTS `promotion_coupon` (
+                                                  `id`                   BIGINT NOT NULL AUTO_INCREMENT,
+                                                  `template_id`          BIGINT NOT NULL,
+                                                  `name`                 VARCHAR(255) NOT NULL,
+                                                  `status`               INT NOT NULL,
+                                                  `user_id`              BIGINT NOT NULL,
+                                                  `take_type`            INT NOT NULL,
+                                                  `useprice`             INT NOT NULL,
+                                                  `valid_start_time`     DATETIME NOT NULL,
+                                                  `valid_end_time`       DATETIME NOT NULL,
+                                                  `product_scope`        INT NOT NULL,
+                                                  `product_spu_ids`      VARCHAR(2000),
+                                                  `discount_type`        INT NOT NULL,
+                                                  `discount_percent`     INT,
+                                                  `discount_price`       INT,
+                                                  `discount_limit_price` INT,
+                                                  `use_order_id`         BIGINT,
+                                                  `use_time`             DATETIME,
+                                                  `creator`              VARCHAR(64) DEFAULT '',
+                                                  `create_time`          DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                                                  `updater`              VARCHAR(64) DEFAULT '',
+                                                  `update_time`          DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+                                                  `deleted`              BIT(1) NOT NULL DEFAULT b'0',
+                                                  PRIMARY KEY (`id`)
+) COMMENT='优惠劵';
+
+CREATE TABLE IF NOT EXISTS `promotion_reward_activity` (
+                                                           `id`              BIGINT NOT NULL AUTO_INCREMENT,
+                                                           `name`            VARCHAR(255) NOT NULL,
+                                                           `status`          INT NOT NULL,
+                                                           `start_time`      DATETIME NOT NULL,
+                                                           `end_time`        DATETIME NOT NULL,
+                                                           `remark`          VARCHAR(2000),
+                                                           `condition_type`  INT NOT NULL,
+                                                           `product_scope`   INT NOT NULL,
+                                                           `product_spu_ids` VARCHAR(2000),
+                                                           `rules`           VARCHAR(2000),
+                                                           `creator`         VARCHAR(64) DEFAULT '',
+                                                           `create_time`     DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                                                           `updater`         VARCHAR(64) DEFAULT '',
+                                                           `update_time`     DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+                                                           `deleted`         BIT(1) NOT NULL DEFAULT b'0',
+                                                           PRIMARY KEY (`id`)
+) COMMENT='满减送活动';
+
+CREATE TABLE IF NOT EXISTS `promotion_discount_activity` (
+                                                             `id`          BIGINT NOT NULL AUTO_INCREMENT,
+                                                             `name`        VARCHAR(255) NOT NULL,
+                                                             `status`      INT NOT NULL,
+                                                             `start_time`  DATETIME NOT NULL,
+                                                             `end_time`    DATETIME NOT NULL,
+                                                             `remark`      VARCHAR(2000),
+                                                             `creator`     VARCHAR(64) DEFAULT '',
+                                                             `create_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                                                             `updater`     VARCHAR(64) DEFAULT '',
+                                                             `update_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+                                                             `deleted`     BIT(1) NOT NULL DEFAULT b'0',
+                                                             PRIMARY KEY (`id`)
+) COMMENT='限时折扣活动';
+CREATE TABLE IF NOT EXISTS promotion_seckill_activity (
+                                                          id BIGINT NOT NULL AUTO_INCREMENT,
+                                                          spu_id BIGINT NOT NULL,
+                                                          name VARCHAR(255) NOT NULL,
+                                                          status INT NOT NULL,
+                                                          remark VARCHAR(255),
+                                                          start_time VARCHAR(255) NOT NULL,
+                                                          end_time VARCHAR(255) NOT NULL,
+                                                          sort INT NOT NULL,
+                                                          config_ids VARCHAR(255) NOT NULL,
+                                                          order_count INT NOT NULL,
+                                                          user_count INT NOT NULL,
+                                                          total_price INT NOT NULL,
+                                                          total_limit_count INT,
+                                                          single_limit_count INT,
+                                                          stock INT,
+                                                          total_stock INT,
+                                                          creator VARCHAR(255) DEFAULT '',
+                                                          create_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                                                          updater VARCHAR(255) DEFAULT '',
+                                                          update_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+                                                          deleted BOOLEAN NOT NULL DEFAULT FALSE,
+                                                          tenant_id BIGINT NOT NULL,
+                                                          PRIMARY KEY (id)
+) COMMENT='秒杀活动';
+
+CREATE TABLE IF NOT EXISTS promotion_seckill_config (
+                                                        id BIGINT NOT NULL AUTO_INCREMENT,
+                                                        name VARCHAR(255) NOT NULL,
+                                                        start_time VARCHAR(255) NOT NULL,
+                                                        end_time VARCHAR(255) NOT NULL,
+                                                        pic_url VARCHAR(255) NOT NULL,
+                                                        status INT NOT NULL,
+                                                        creator VARCHAR(255) DEFAULT '',
+                                                        create_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                                                        updater VARCHAR(255) DEFAULT '',
+                                                        update_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+                                                        deleted BOOLEAN NOT NULL DEFAULT FALSE,
+                                                        tenant_id BIGINT NOT NULL,
+                                                        PRIMARY KEY (id)
+) COMMENT='秒杀时段配置';
+
+CREATE TABLE IF NOT EXISTS promotion_combination_activity (
+                                                              id BIGINT NOT NULL AUTO_INCREMENT,
+                                                              name VARCHAR(255) NOT NULL,
+                                                              spu_id BIGINT,
+                                                              total_limit_count INT NOT NULL,
+                                                              single_limit_count INT NOT NULL,
+                                                              start_time VARCHAR(255) NOT NULL,
+                                                              end_time VARCHAR(255) NOT NULL,
+                                                              user_size INT NOT NULL,
+                                                              total_num INT NOT NULL,
+                                                              success_num INT NOT NULL,
+                                                              order_user_count INT NOT NULL,
+                                                              virtual_group INT NOT NULL,
+                                                              status INT NOT NULL,
+                                                              limit_duration INT NOT NULL,
+                                                              creator VARCHAR(255) DEFAULT '',
+                                                              create_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                                                              updater VARCHAR(255) DEFAULT '',
+                                                              update_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+                                                              deleted BOOLEAN NOT NULL DEFAULT FALSE,
+                                                              tenant_id BIGINT NOT NULL,
+                                                              PRIMARY KEY (id)
+) COMMENT='拼团活动';
+
+CREATE TABLE IF NOT EXISTS promotion_article_category (
+                                                          id BIGINT NOT NULL AUTO_INCREMENT,
+                                                          name VARCHAR(255) NOT NULL,
+                                                          pic_url VARCHAR(255),
+                                                          status INT NOT NULL,
+                                                          sort INT NOT NULL,
+                                                          creator VARCHAR(255) DEFAULT '',
+                                                          create_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                                                          updater VARCHAR(255) DEFAULT '',
+                                                          update_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+                                                          deleted BOOLEAN NOT NULL DEFAULT FALSE,
+                                                          tenant_id BIGINT NOT NULL,
+                                                          PRIMARY KEY (id)
+) COMMENT='文章分类表';
+
+CREATE TABLE IF NOT EXISTS promotion_article (
+                                                 id BIGINT NOT NULL AUTO_INCREMENT,
+                                                 category_id BIGINT NOT NULL,
+                                                 title VARCHAR(255) NOT NULL,
+                                                 author VARCHAR(255),
+                                                 pic_url VARCHAR(255) NOT NULL,
+                                                 introduction VARCHAR(255),
+                                                 browse_count VARCHAR(255),
+                                                 sort INT NOT NULL,
+                                                 status INT NOT NULL,
+                                                 spu_id BIGINT NOT NULL,
+                                                 recommend_hot BOOLEAN NOT NULL,
+                                                 recommend_banner BOOLEAN NOT NULL,
+                                                 content VARCHAR(255) NOT NULL,
+                                                 creator VARCHAR(255) DEFAULT '',
+                                                 create_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                                                 updater VARCHAR(255) DEFAULT '',
+                                                 update_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+                                                 deleted BOOLEAN NOT NULL DEFAULT FALSE,
+                                                 tenant_id BIGINT NOT NULL,
+                                                 PRIMARY KEY (id)
+) COMMENT='文章管理表';
+
+CREATE TABLE IF NOT EXISTS promotion_diy_template (
+                                                      id BIGINT NOT NULL AUTO_INCREMENT,
+                                                      name VARCHAR(255) NOT NULL,
+                                                      used BOOLEAN NOT NULL,
+                                                      used_time VARCHAR(255),
+                                                      remark VARCHAR(255),
+                                                      preview_pic_urls VARCHAR(255),
+                                                      property VARCHAR(255) NOT NULL,
+                                                      creator VARCHAR(255) DEFAULT '',
+                                                      create_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                                                      updater VARCHAR(255) DEFAULT '',
+                                                      update_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+                                                      deleted BOOLEAN NOT NULL DEFAULT FALSE,
+                                                      tenant_id BIGINT NOT NULL DEFAULT 0,
+                                                      PRIMARY KEY (id)
+) COMMENT='装修模板';
+
+CREATE TABLE IF NOT EXISTS promotion_diy_page (
+                                                  id BIGINT NOT NULL AUTO_INCREMENT,
+                                                  template_id BIGINT NOT NULL,
+                                                  name VARCHAR(255) NOT NULL,
+                                                  remark VARCHAR(255),
+                                                  preview_pic_urls VARCHAR(255),
+                                                  property VARCHAR(255),
+                                                  creator VARCHAR(255) DEFAULT '',
+                                                  create_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                                                  updater VARCHAR(255) DEFAULT '',
+                                                  update_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+                                                  deleted BOOLEAN NOT NULL DEFAULT FALSE,
+                                                  tenant_id BIGINT NOT NULL,
+                                                  PRIMARY KEY (id)
+) COMMENT='装修页面';

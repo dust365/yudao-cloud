@@ -5,3 +5,4 @@ DELETE FROM "product_brand";
 DELETE FROM "product_property";
 DELETE FROM "product_property_value";
 DELETE FROM "product_comment";
+
