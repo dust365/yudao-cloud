@@ -1,0 +1,12 @@
+DELETE FROM "ai_chat_conversation";
+DELETE FROM "ai_chat_message";
+DELETE FROM "ai_image";
+DELETE FROM "ai_knowledge";
+DELETE FROM "ai_knowledge_document";
+DELETE FROM "ai_knowledge_segment";
+DELETE FROM "ai_mind_map";
+DELETE FROM "ai_api_key";
+DELETE FROM "ai_chat_model";
+DELETE FROM "ai_chat_role";
+DELETE FROM "ai_music";
+DELETE FROM "ai_write";

@@ -12,3 +12,5 @@ CREATE TABLE IF NOT EXISTS "report_go_view_project" (
     "deleted" bit NOT NULL DEFAULT FALSE,
     PRIMARY KEY ("id")
 ) COMMENT 'GoView 项目表';
+
+
